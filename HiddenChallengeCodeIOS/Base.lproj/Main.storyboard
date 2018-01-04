@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iq2-3p-eAn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,11 +22,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="178" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xme-PH-CSC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="178" id="ZXn-ia-uw5" customClass="TableViewCell" customModule="HiddenChallengeCodeIOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="178" id="ZXn-ia-uw5" customClass="TableViewCell" customModule="HiddenChallengeCodeIOS">
                                         <rect key="frame" x="0.0" y="28" width="375" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZXn-ia-uw5" id="Poj-zd-Mbv">
@@ -72,12 +72,12 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="desLabel" destination="wvZ-kT-vro" id="PXV-Th-TcO"/>
-                                            <outlet property="imgView" destination="E3E-C2-6B3" id="5og-ML-DWt"/>
-                                            <outlet property="loginLabel" destination="GYQ-Dy-1q7" id="dGV-zE-E6z"/>
-                                            <outlet property="nameLabel" destination="kjl-TL-tGF" id="TQq-v4-EPf"/>
-                                            <outlet property="startLabel" destination="QWV-nw-Jzo" id="yBX-zl-yTH"/>
-                                            <segue destination="ecc-Sn-nc2" kind="show" id="efh-Rq-AKA"/>
+                                            <outlet property="desLabel" destination="wvZ-kT-vro" id="pma-Cv-ePk"/>
+                                            <outlet property="imageView" destination="E3E-C2-6B3" id="NaI-Fc-mIc"/>
+                                            <outlet property="imgView" destination="E3E-C2-6B3" id="t9O-Fo-Nor"/>
+                                            <outlet property="loginLabel" destination="GYQ-Dy-1q7" id="dTI-8B-R3l"/>
+                                            <outlet property="nameLabel" destination="kjl-TL-tGF" id="wnI-JK-Qw8"/>
+                                            <outlet property="startLabel" destination="QWV-nw-Jzo" id="V1A-7A-Ew4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -96,12 +96,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nCr-gx-xFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1256.8" y="-17.541229385307346"/>
+            <point key="canvasLocation" x="1533.5999999999999" y="-135.38230884557723"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="PWY-Oh-O6w">
             <objects>
-                <viewController id="ecc-Sn-nc2" customClass="DetailViewController" customModule="HiddenChallengeCodeIOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ecc-Sn-nc2" customClass="DetailViewController" customModule="HiddenChallengeCodeIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C7h-xX-CG1"/>
                         <viewControllerLayoutGuide type="bottom" id="Tdw-Yz-kNn"/>
@@ -150,16 +150,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="desLabel" destination="2MX-pf-EN3" id="nFy-om-424"/>
-                        <outlet property="imageView" destination="AYb-mM-AVJ" id="fyZ-7k-a4S"/>
-                        <outlet property="loginLabel" destination="jHO-Gl-hGb" id="kqj-mz-Ik9"/>
-                        <outlet property="nameLabel" destination="0SL-KO-skp" id="sj2-7T-3wj"/>
-                        <outlet property="startLabel" destination="Lvh-9w-oGj" id="BfR-I5-XWx"/>
+                        <outlet property="desLabel" destination="2MX-pf-EN3" id="NeT-zB-8Zq"/>
+                        <outlet property="imageView" destination="AYb-mM-AVJ" id="X9u-8X-9vu"/>
+                        <outlet property="loginLabel" destination="jHO-Gl-hGb" id="GfB-UT-3F4"/>
+                        <outlet property="nameLabel" destination="0SL-KO-skp" id="WWr-sV-SdY"/>
+                        <outlet property="startLabel" destination="Lvh-9w-oGj" id="9e6-Hn-4nZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QfR-y6-0NJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2362" y="-18"/>
+            <point key="canvasLocation" x="1944.8" y="-277.51124437781112"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nQ9-PU-6m0">

@@ -6,17 +6,22 @@
 //  Copyright © 2018 mac. All rights reserved.
 //
 
+
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    
+    
+    
     //current controller IBOutlets
-  
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var desLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var startLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    
+
     //data from previous controller
     var nameString:String!
     var desString:String!
@@ -43,5 +48,4 @@ class DetailViewController: UIViewController {
         let data = NSData(contentsOf: (imgURL)!)
         self.imageView.image = UIImage(data: data! as Data)
     }
-
 }
