@@ -11,12 +11,15 @@ import UIKit
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     
-
-  final let urlString = "https://api.github.com/search/repositories?q=created:%3E2017-10-22&sort=stars&order=desc"
+    
+    final let urlString = "https://api.github.com/search/repositories?q=created:%3E2017-10-22&sort=stars&order=desc"
     
     @IBOutlet weak var tableView: UITableView!
+    
+    // declaration des variables qui va contenir les tableaux des données JSON
+    
     var nameArray = [String]()
-    var desArray = [Any]()
+    var desArray = [Any?]()
     var loginArray = [String]()
     var startArray = [Double]()
     var imgURLArray = [String]()
@@ -24,18 +27,18 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // a le recharegement de l'application la fonction DownloadJSonWithURL() va executer
         self.downloadJsonWithURL()
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // la fonction qui va étre charger de remplir les tableaux qu'on declarer precedement apartir de URL
     func downloadJsonWithURL() {
         let url = NSURL(string: urlString)
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
@@ -54,6 +57,12 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                                 self.nameArray.append(name as! String)
                             }
                             
+                            
+                            //                                if let name = RepoDict.value(forKey: "owner") {
+                            //                                    self.nameArray.append(name["login"] as! String)
+                            //                                    //self.imgURLArray.append(name as! String)
+                            //                                    //
+                            //                                }
                             if let name = RepoDict.value(forKey: "description") {
                                 self.desArray.append(name)
                             }
@@ -62,6 +71,12 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                                 self.startArray.append(k)
                             }
                             
+                            //                                 if let name = RepoDict.value(forKey: "avatar_url") {
+                            //                                self.imgURLArray.append(name as! String)
+                            //                            }
+                            //                                if let name = RepoDict.value(forKey: "stargazers_count") {
+                            //                                    self.startArray.append(name as! Int)
+                            //                                }
                             if let name = RepoDict.value(forKey: "owner") as? NSDictionary  {
                                 self.loginArray.append(name.value(forKey: "login") as! String)
                             }
@@ -82,6 +97,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     
+    
+    
     func downloadJsonWithTask() {
         
         let url = NSURL(string: urlString)
@@ -99,20 +116,20 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         }).resume()
     }
     
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameArray.count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableViewCell
         cell.nameLabel.text = nameArray[indexPath.row]
-        
         cell.desLabel.text = desArray[indexPath.row] as? String
         cell.loginLabel.text = loginArray[indexPath.row]
-        
         cell.startLabel.text = String(format:"%.1f", startArray[indexPath.row])+"K"
-        
-        
         let imgURL = NSURL(string: imgURLArray[indexPath.row])
         
         if imgURL != nil {
@@ -123,6 +140,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         return cell
     }
     
+    
     ///for showing next detailed screen with the downloaded info
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -132,7 +150,16 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         vc.nameString = nameArray[indexPath.row]
         vc.loginString = loginArray[indexPath.row]
         vc.startInt = String(format:"%.1f", startArray[indexPath.row])+"K"
-        vc.desString = desArray[indexPath.row] as! String
+        
+        // pour traiter le cas de description = null
+        if let Description = self.desArray[indexPath.row] as? String{
+            vc.desString = Description
+                }else{
+                vc.desString = " pas de description "
+        }
+    
+        
+        
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

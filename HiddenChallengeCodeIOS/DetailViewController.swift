@@ -39,6 +39,7 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     func updateUI() {
         self.nameLabel.text = nameString
         self.desLabel.text = desString
