@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
-    
-    
+class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate{
+  
     
     final let urlString = "https://api.github.com/search/repositories?q=created:%3E2017-10-22&sort=stars&order=desc"
     
@@ -38,85 +37,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    // la fonction qui va étre charger de remplir les tableaux qu'on declarer precedement apartir de URL
-    func downloadJsonWithURL() {
-        let url = NSURL(string: urlString)
-        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
-            
-            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
-                
-                print(jsonObj!.value(forKey: "items")!)
-                
-                
-                if let RepoArray = jsonObj!.value(forKey: "items") as? NSArray {
-                    
-                    for repo in RepoArray{
-                        
-                        if let RepoDict = repo as? NSDictionary {
-                            if let name = RepoDict.value(forKey: "name") {
-                                self.nameArray.append(name as! String)
-                            }
-                            
-                            
-                            //                                if let name = RepoDict.value(forKey: "owner") {
-                            //                                    self.nameArray.append(name["login"] as! String)
-                            //                                    //self.imgURLArray.append(name as! String)
-                            //                                    //
-                            //                                }
-                            if let name = RepoDict.value(forKey: "description") {
-                                self.desArray.append(name)
-                            }
-                            if let name = RepoDict.value(forKey: "stargazers_count") as? Double{
-                                let k = name / 1000
-                                self.startArray.append(k)
-                            }
-                            
-                            //                                 if let name = RepoDict.value(forKey: "avatar_url") {
-                            //                                self.imgURLArray.append(name as! String)
-                            //                            }
-                            //                                if let name = RepoDict.value(forKey: "stargazers_count") {
-                            //                                    self.startArray.append(name as! Int)
-                            //                                }
-                            if let name = RepoDict.value(forKey: "owner") as? NSDictionary  {
-                                self.loginArray.append(name.value(forKey: "login") as! String)
-                            }
-                            
-                            if let name = RepoDict.value(forKey: "owner") as? NSDictionary  {
-                                self.imgURLArray.append(name.value(forKey: "avatar_url") as! String)
-                            }
-                            
-                        }
-                    }
-                }
-                
-                OperationQueue.main.addOperation({
-                    self.tableView.reloadData()
-                })
-            }
-        }).resume()
-    }
-    
-    
-    
-    
-    func downloadJsonWithTask() {
-        
-        let url = NSURL(string: urlString)
-        
-        var downloadTask = URLRequest(url: (url as URL?)!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: 20)
-        
-        downloadTask.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: downloadTask, completionHandler: {(data, response, error) -> Void in
-            
-            let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-            
-            print(jsonData!)
-            
-        }).resume()
-    }
-    
-    
+ 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameArray.count
@@ -157,11 +78,65 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
                 }else{
                 vc.desString = " pas de description "
         }
-    
-        
-        
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
+    // la fonction qui va étre charger de remplir les tableaux qu'on declarer precedement apartir de URL
+    func downloadJsonWithURL() {
+        let url = NSURL(string: urlString)
+        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
+            
+            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+                
+                // result console
+                print(jsonObj!.value(forKey: "items")!)
+                
+                
+                if let RepoArray = jsonObj!.value(forKey: "items") as? NSArray {
+                    
+                    for repo in RepoArray{
+                        
+                        if let RepoDict = repo as? NSDictionary {
+                            if let name = RepoDict.value(forKey: "name") {
+                                self.nameArray.append(name as! String)
+                            }
+                            
+                            if let name = RepoDict.value(forKey: "description") {
+                                self.desArray.append(name)
+                            }
+                            if let name = RepoDict.value(forKey: "stargazers_count") as? Double{
+                                let k = name / 1000
+                                self.startArray.append(k)
+                            }
+                            
+                            if let name = RepoDict.value(forKey: "owner") as? NSDictionary  {
+                                self.loginArray.append(name.value(forKey: "login") as! String)
+                            }
+                            
+                            if let name = RepoDict.value(forKey: "owner") as? NSDictionary  {
+                                self.imgURLArray.append(name.value(forKey: "avatar_url") as! String)
+                            }
+                            
+                        }
+                    }
+                }
+                
+                OperationQueue.main.addOperation({
+                    self.tableView.reloadData()
+                })
+            }
+        }).resume()
+    }
+    
+    
+    
 }
+
+
+
+
+
+
 
